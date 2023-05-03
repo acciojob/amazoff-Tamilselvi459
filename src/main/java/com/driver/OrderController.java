@@ -19,7 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/orders")
 public class OrderController {
 
-    OrderService orderservice = new OrderService();
+    @Autowired
+    OrderService orderservice ;
+
+    public OrderController(OrderService orderservice){
+        this.orderservice = orderservice;
+    }
     @PostMapping("/add-order")
     public ResponseEntity<String> addOrder(@RequestBody Order order){
           orderservice.addOrder(order);
