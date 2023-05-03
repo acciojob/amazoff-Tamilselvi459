@@ -8,9 +8,14 @@ import java.util.List;
 
 @Repository
 public class OrderRepository {
-    HashMap<String , Order> orderMap = new HashMap<>();
-    HashMap<String, DeliveryPartner> deliveryPartnerHashMap = new HashMap<>();
-    HashMap<String , String > pairMap = new HashMap<>();
+    HashMap<String , Order> orderMap;
+    HashMap<String, DeliveryPartner> deliveryPartnerHashMap ;
+    HashMap<String , String > pairMap ;
+    public OrderRepository(){
+        this.orderMap = new HashMap<String,Order>();
+        this.deliveryPartnerHashMap = new HashMap<String,DeliveryPartner>();
+        this.pairMap = new HashMap<String,String>();
+    }
 
     public void addOrder(Order order) {
         orderMap.put(order.getId(), order);
