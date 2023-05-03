@@ -29,7 +29,7 @@ public class Order {
         String mm = String.valueOf(MM);
         if(hh.length()==1) hh = '0'+hh;
         if(mm.length()==1) mm = '0'+mm;
-        return hh+mm;
+        return hh+":"+mm;
     }
    public void setDeliveryTime(String deliveryTime){
         this.deliveryTime = convertTime(deliveryTime);

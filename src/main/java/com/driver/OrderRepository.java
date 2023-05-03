@@ -27,15 +27,19 @@ public class OrderRepository {
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
+
         pairMap.put(orderId , partnerId);
     }
 
     public Order getOrderById(String orderId) {
-        return orderMap.get(orderId);
+        if(orderMap.containsKey(orderId)) return orderMap.get(orderId);
+        return null;
     }
 
     public DeliveryPartner getPartnerById(String partnerId) {
+        if(deliveryPartnerHashMap.containsKey(partnerId))
         return deliveryPartnerHashMap.get(partnerId);
+        return null;
     }
 
     public Integer getOrderCountByPartner(String partnerId) {
@@ -65,9 +69,7 @@ public class OrderRepository {
 
     public Integer getCountOfUnassignedOrders() {
         Integer count = 0;
-      for(String id : orderMap.keySet()){
-          if(!pairMap.containsKey(id))  count++;
-      }
+      count = getAllOrders().size() - pairMap.size();
       return count;
     }
 
