@@ -47,4 +47,34 @@ public class OrderService {
     public Integer getCountOfUnassignedOrders() {
         return orderrepository.getCountOfUnassignedOrders();
     }
+
+    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
+        List<String> ans = orderrepository.getOrdersByPartnerId(partnerId);
+        int t = Order.convertTime(time);
+        Integer count = 0;
+        for(String name : ans){
+          int dtime = orderrepository.getOrderById(name).getDeliveryTime();
+          if(t<dtime) count++;
+        }
+        return count;
+
+    }
+
+    public String getLastDeliveryTimeByPartnerId(String partnerId) {
+        List<String> ans = orderrepository.getOrdersByPartnerId(partnerId);
+        int max = 0;
+        for(String name : ans){
+            int dtime = orderrepository.getOrderById(name).getDeliveryTime();
+            if(dtime>max) max = dtime;
+        }
+        return Order.convertTime(max);
+    }
+
+    public void deletePartnerById(String partnerId) {
+        orderrepository.deletePartnerById(partnerId);
+    }
+
+    public void deleteOrderById(String orderId) {
+        orderrepository.deleteOrderById(orderId);
+    }
 }

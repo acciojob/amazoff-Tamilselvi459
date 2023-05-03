@@ -65,4 +65,17 @@ public class OrderRepository {
       }
       return count;
     }
+
+    public void deletePartnerById(String partnerId) {
+        deliveryPartnerHashMap.remove(partnerId);
+       List<String> ans =  getOrdersByPartnerId(partnerId);
+       for(String name : ans){
+           pairMap.remove(name);
+       }
+    }
+
+    public void deleteOrderById(String orderId) {
+        orderMap.remove(orderId);
+        pairMap.remove(orderId);
+    }
 }
