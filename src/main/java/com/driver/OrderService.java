@@ -13,10 +13,12 @@ public class OrderService {
 
 
     public void addOrder(Order order) {
+
         orderrepository.addOrder(order);
     }
 
     public void addPartner(String partnerId) {
+
         orderrepository.addPartner(partnerId);
     }
 
@@ -25,10 +27,12 @@ public class OrderService {
     }
 
     public Order getOrderById(String orderId) {
-       return orderrepository.getOrderById(orderId);
+
+        return orderrepository.getOrderById(orderId);
     }
 
     public DeliveryPartner getPartnerById(String partnerId) {
+
         return orderrepository.getPartnerById(partnerId);
     }
 
@@ -41,10 +45,29 @@ public class OrderService {
     }
 
     public List<String> getAllOrders() {
+
         return orderrepository.getAllOrders();
     }
 
     public Integer getCountOfUnassignedOrders() {
+
         return orderrepository.getCountOfUnassignedOrders();
+    }
+
+    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
+        int a = Order.convertdeliveryTime(time);
+        return orderrepository.getOrdersLeftAfterGivenTimeByPartnerId(a,partnerId);
+    }
+
+    public String getLastDeliveryTimeByPartnerId(String partnerId) {
+        return orderrepository.getLastDeliveryTimeByPartnerId(partnerId);
+    }
+
+    public void deletePartnerById(String partnerId) {
+        orderrepository.deletePartnerById(partnerId);
+    }
+
+    public void deleteOrderById(String orderId) {
+        orderrepository.deleteOrderById(orderId);
     }
 }

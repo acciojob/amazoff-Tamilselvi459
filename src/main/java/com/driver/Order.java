@@ -16,11 +16,19 @@ public class Order {
         this.deliveryTime = convertdeliveryTime(deliveryTime);
     }
 
-    private int convertdeliveryTime(String deliveryTime) {
+    public static int convertdeliveryTime(String deliveryTime) {
         List<String> list = Arrays.asList(deliveryTime.split(":"));
         int HH = Integer.parseInt(list.get(0));
         int MM = Integer.parseInt(list.get(1));
         return HH*60 + MM;
+    }
+    public static String convertdeliveryTime(int deliveryTime){
+        String hh = String.valueOf(deliveryTime/60);
+        String mm = String.valueOf(deliveryTime%60);
+        if(hh.length()==1) hh = '0'+hh;
+        if(mm.length()==1) mm = '0'+mm;
+
+        return hh+":"+mm;
     }
    public void setDeliveryTime(String deliveryTime){
         this.deliveryTime = convertdeliveryTime(deliveryTime);
