@@ -116,7 +116,6 @@ public class OrderRepository {
 
     public void deletePartnerById(String partnerId) {
 
-       if(partnerMap.containsKey(partnerId)) partnerMap.remove(partnerId);
         if(partnerorderMap.containsKey(partnerId)) {
             List<String> ans = partnerorderMap.get(partnerId);
             partnerorderMap.remove(partnerId);
@@ -124,7 +123,7 @@ public class OrderRepository {
                 orderMap.remove(id);
             }
         }
-
+      if(partnerMap.containsKey(partnerId)) partnerMap.remove(partnerId);
 
 
     }
