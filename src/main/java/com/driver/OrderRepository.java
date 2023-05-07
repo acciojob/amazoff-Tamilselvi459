@@ -8,9 +8,20 @@ import java.util.List;
 
 @Repository
 public class OrderRepository {
+<<<<<<< HEAD
     HashMap<String , Order> orderMap = new HashMap<>();
     HashMap<String, DeliveryPartner> partnerMap = new HashMap<>();
     HashMap<String , List<String> > partnerorderMap = new HashMap<>();
+=======
+    HashMap<String , Order> orderMap;
+    HashMap<String, DeliveryPartner> deliveryPartnerHashMap ;
+    HashMap<String , String > pairMap ;
+    public OrderRepository(){
+        this.orderMap = new HashMap<String,Order>();
+        this.deliveryPartnerHashMap = new HashMap<String,DeliveryPartner>();
+        this.pairMap = new HashMap<String,String>();
+    }
+>>>>>>> cf1e2647468d769b85cbe2a14aac32d9489d1477
 
     public void addOrder(Order order) {
 
@@ -25,6 +36,7 @@ public class OrderRepository {
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
+<<<<<<< HEAD
         List<String> ans = partnerorderMap.get(partnerId);
         ans.add(orderId);
         partnerorderMap.put(partnerId,ans);
@@ -38,6 +50,21 @@ public class OrderRepository {
     public DeliveryPartner getPartnerById(String partnerId) {
 
         return partnerMap.get(partnerId);
+=======
+
+        pairMap.put(orderId , partnerId);
+    }
+
+    public Order getOrderById(String orderId) {
+        if(orderMap.containsKey(orderId)) return orderMap.get(orderId);
+        return null;
+    }
+
+    public DeliveryPartner getPartnerById(String partnerId) {
+        if(deliveryPartnerHashMap.containsKey(partnerId))
+        return deliveryPartnerHashMap.get(partnerId);
+        return null;
+>>>>>>> cf1e2647468d769b85cbe2a14aac32d9489d1477
     }
 
     public Integer getOrderCountByPartner(String partnerId) {
@@ -81,6 +108,7 @@ public class OrderRepository {
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(int a, String partnerId) {
         Integer count = 0;
+<<<<<<< HEAD
         List<String> ans = partnerorderMap.get(partnerId);
         for(String id : ans){
             if(orderMap.get(id).getDeliveryTime()>a) count++;
@@ -111,5 +139,22 @@ public class OrderRepository {
             List<String> ans = partnerorderMap.get(id);
             if(ans.contains(orderId)) ans.remove(orderId);
         }
+=======
+      count = getAllOrders().size() - pairMap.size();
+      return count;
+>>>>>>> cf1e2647468d769b85cbe2a14aac32d9489d1477
+    }
+
+    public void deletePartnerById(String partnerId) {
+        deliveryPartnerHashMap.remove(partnerId);
+       List<String> ans =  getOrdersByPartnerId(partnerId);
+       for(String name : ans){
+           pairMap.remove(name);
+       }
+    }
+
+    public void deleteOrderById(String orderId) {
+        orderMap.remove(orderId);
+        pairMap.remove(orderId);
     }
 }

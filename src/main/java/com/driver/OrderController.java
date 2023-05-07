@@ -18,9 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
+
     @Autowired
+<<<<<<< HEAD
     OrderService orderservice;
     @PostMapping("/add-order") // 1
+=======
+    OrderService orderservice ;
+
+    public OrderController(OrderService orderservice){
+        this.orderservice = orderservice;
+    }
+    @PostMapping("/add-order")
+>>>>>>> cf1e2647468d769b85cbe2a14aac32d9489d1477
     public ResponseEntity<String> addOrder(@RequestBody Order order){
           orderservice.addOrder(order);
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
@@ -121,6 +131,10 @@ public class OrderController {
         //Delete the partnerId
         //And push all his assigned orders to unassigned orders.
         orderservice.deletePartnerById(partnerId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> cf1e2647468d769b85cbe2a14aac32d9489d1477
         return new ResponseEntity<>(partnerId + " removed successfully", HttpStatus.CREATED);
     }
 
