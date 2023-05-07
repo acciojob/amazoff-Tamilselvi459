@@ -38,7 +38,10 @@ public class OrderRepository {
         return orderMap.get(orderId);
     }
     public DeliveryPartner getPartnerById(String partnerId) {
-        return partnerMap.get(partnerId);
+
+        DeliveryPartner partner = partnerMap.get(partnerId);
+
+        return partner;
     }
     public Integer getOrderCountByPartner(String partnerId) {
 
@@ -61,24 +64,31 @@ public class OrderRepository {
     }
 
     public Integer getCountOfUnassignedOrders() {
-       Integer count = 0;
-
-       for(String id : orderMap.keySet()){
-           boolean flag = false;
-           for(String partnerid : partnerorderMap.keySet()){
-               List<String> ans = partnerorderMap.get(partnerid);
-               if(ans.contains(id))
-               {
-                   flag = true;
-                   break;
-               }
-           }
-           if(flag==false) count++;
-
-           }
-       return count;
-       }
-
+        Integer count = 0;
+        for (String id : orderMap.keySet()) {
+            boolean flag = true;
+//           for(String partnerid : partnerorderMap.keySet()){
+//               List<String> ans = partnerorderMap.get(partnerid);
+//               if(ans.contains(id))
+//               {
+//                   flag = true;
+//                   break;
+//               }
+//           }
+//           if(flag==false) count++;
+//
+//           }
+//       return count;
+            for (List<String> ans : partnerorderMap.values()) {
+                if (ans.contains(id)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) count++;
+        }
+        return count;
+    }
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(int a, String partnerId) {
         Integer count = 0;
 
@@ -94,7 +104,7 @@ public class OrderRepository {
         int time = 0;
         List<String> ans = partnerorderMap.get(partnerId);
         for(String id : ans){
-            if(time>orderMap.get(id).getDeliveryTime()) {
+            if(time<orderMap.get(id).getDeliveryTime()) {
                 time = orderMap.get(id).getDeliveryTime();
             }
         }
