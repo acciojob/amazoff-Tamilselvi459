@@ -77,10 +77,10 @@ public class OrderRepository {
     }
 
     public Integer getCountOfUnassignedOrders() {
-        Integer count = 0;
-        count = allorder - assingedorder;
 
-        return count;
+        return allorder - assingedorder;
+
+
     }
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(int a, String partnerId) {
         Integer count = 0;
@@ -107,8 +107,16 @@ public class OrderRepository {
 
     public void deletePartnerById(String partnerId) {
 
-        if(partnerorderMap.containsKey(partnerId))
-          partnerorderMap.remove(partnerId);
+       if(partnerMap.containsKey(partnerId)) partnerMap.remove(partnerId);
+        if(partnerorderMap.containsKey(partnerId)) {
+            List<String> ans = partnerorderMap.get(partnerId);
+            partnerorderMap.remove(partnerId);
+            for(String id : ans){
+                orderMap.remove(id);
+            }
+        }
+
+
 
     }
 
