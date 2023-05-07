@@ -9,11 +9,18 @@ import java.util.List;
 @Repository
 public class OrderRepository {
 
-    HashMap<String , Order> orderMap = new HashMap<>();
-    HashMap<String, DeliveryPartner> partnerMap = new HashMap<>();
-    HashMap<String , List<String> > partnerorderMap = new HashMap<>();
+    HashMap<String , Order> orderMap ;
+    HashMap<String, DeliveryPartner> partnerMap ;
+    HashMap<String , List<String> > partnerorderMap;
     public int assingedorder = 0;
     public int allorder = 0;
+    public OrderRepository(){
+        orderMap = new HashMap<>();
+        partnerMap = new HashMap<>() ;
+        partnerorderMap  = new HashMap<>();
+       this. assingedorder = assingedorder;
+       this.allorder = allorder;
+    }
 
 
     public void addOrder(Order order) {
@@ -101,7 +108,7 @@ public class OrderRepository {
     public void deletePartnerById(String partnerId) {
 
         if(partnerorderMap.containsKey(partnerId))
-        partnerorderMap.remove(partnerId);
+          partnerorderMap.remove(partnerId);
 
     }
 
