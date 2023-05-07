@@ -9,13 +9,13 @@ import java.util.List;
 public class OrderService {
 
 
-    OrderRepository orderrepository ;
+    OrderRepository orderrepository = new OrderRepository();
 
     // as
-    public OrderService(OrderRepository orderrepositry){
-
-        this.orderrepository = orderrepositry;
-    }
+//    public OrderService(OrderRepository orderrepositry){
+//
+//        this.orderrepository = orderrepositry;
+//    }
 
     public void addOrder(Order order) {
 
