@@ -39,9 +39,9 @@ public class OrderRepository {
     }
     public DeliveryPartner getPartnerById(String partnerId) {
 
-        DeliveryPartner partner = partnerMap.get(partnerId);
+       if(partnerMap.containsKey(partnerId)) return partnerMap.get(partnerId);
 
-        return partner;
+        return null;
     }
     public Integer getOrderCountByPartner(String partnerId) {
 
@@ -64,26 +64,16 @@ public class OrderRepository {
     }
 
     public Integer getCountOfUnassignedOrders() {
-        Integer count = 0;
-        for (String id : orderMap.keySet()) {
+        Integer count = null;
+        for(String oid : orderMap.keySet()) {
             boolean flag = true;
-//           for(String partnerid : partnerorderMap.keySet()){
-//               List<String> ans = partnerorderMap.get(partnerid);
-//               if(ans.contains(id))
-//               {
-//                   flag = true;
-//                   break;
-//               }
-//           }
-//           if(flag==false) count++;
-//
-//           }
-//       return count;
-            for (List<String> ans : partnerorderMap.values()) {
-                if (ans.contains(id)) {
+            for (String id : partnerorderMap.keySet()) {
+                List<String> ans = partnerorderMap.get(id);
+                if(ans.contains(oid)) {
                     flag = false;
                     break;
                 }
+
             }
             if(flag) count++;
         }
