@@ -130,10 +130,16 @@ public class OrderRepository {
 
     public void deleteOrderById(String orderId) {
         orderMap.remove(orderId);
+        String ides = null ;
+        List<String> ans = new ArrayList<>();
         for(String id : partnerorderMap.keySet()){
-            List<String> ans = partnerorderMap.get(id);
-            if(ans.contains(orderId)) ans.remove(orderId);
+            ans = partnerorderMap.get(id);
+            if(ans.contains(orderId)) {
+                ides = id;
+                ans.remove(orderId);
+            }
         }
+        if(ides!=null) partnerorderMap.put(ides,ans);
     }
 
 
