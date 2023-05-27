@@ -153,6 +153,7 @@ public class OrderRepository {
                 if (ans.contains(orderId)) {
                     ides = id;
                     ans.remove(orderId);
+                    pass--;
                 }
             }
             if (ides != null) partnerorderMap.put(ides, ans);
