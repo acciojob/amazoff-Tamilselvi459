@@ -26,6 +26,9 @@ public class OrderController {
 //    }
     @Autowired
     OrderService orderservice;
+    public OrderController(){
+        this.orderservice = new OrderService();
+    }
 
     public OrderController(OrderService orderservice)
     {
