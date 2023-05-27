@@ -13,11 +13,13 @@ public class OrderRepository {
     HashMap<String , Order> orderMap ;
     HashMap<String, DeliveryPartner> partnerMap ;
     HashMap<String , List<String> > partnerorderMap;
+    public int pass;
 
     public OrderRepository(){
         orderMap = new HashMap<>();
         partnerMap = new HashMap<>() ;
         partnerorderMap  = new HashMap<>();
+        pass = 0;
 
     }
 
@@ -39,7 +41,7 @@ public class OrderRepository {
 
         List<String> ans = partnerorderMap.get(partnerId);
         ans.add(orderId);
-
+         pass++;
         partnerorderMap.put(partnerId,ans);
     }
 
@@ -81,17 +83,18 @@ public class OrderRepository {
 
     public Integer getCountOfUnassignedOrders() {
     Integer count = 0;
-       for(String id : orderMap.keySet()){
-           boolean flag = true;
-           for(String pid : partnerorderMap.keySet()){
-               List<String> list = partnerorderMap.get(pid);
-               if(list.contains(id)) {
-                   flag = false;
-                   break;
-               }
-           }
-           if(flag) count++;
-       }
+//       for(String id : orderMap.keySet()){
+//           boolean flag = true;
+//           for(String pid : partnerorderMap.keySet()){
+//               List<String> list = partnerorderMap.get(pid);
+//               if(list.contains(id)) {
+//                   flag = false;
+//                   break;
+//               }
+//           }
+//           if(flag) count++;
+//       }
+        count = orderMap.size() - pass;
        return count;
 
 
