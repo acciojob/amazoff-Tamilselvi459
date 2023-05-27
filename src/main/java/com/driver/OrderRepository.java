@@ -117,20 +117,27 @@ public class OrderRepository {
         t = Order.convertdeliveryTime(time);
         return t;
     }
-
-    public void deletePartnerById(String partnerId) {
-     if(partnerId!=null) {
-         if (partnerorderMap.containsKey(partnerId)) {
-             List<String> ans = partnerorderMap.get(partnerId);
-             partnerorderMap.remove(partnerId);
-             for (String id : ans) {
-                 orderMap.remove(id);
-             }
-         }
-         if (partnerMap.containsKey(partnerId)) partnerMap.remove(partnerId);
-     }
-
+    public void deletePartnerById(String partnerId){
+        if(partnerorderMap.containsKey(partnerId)){
+            partnerorderMap.remove(partnerId);
+        }
+        if(partnerMap.containsKey(partnerId)) partnerMap.remove(partnerId);
     }
+
+//    public void deletePartnerById(String partnerId) {
+//     if(partnerId!=null)
+//        {
+//         if (partnerorderMap.containsKey(partnerId)) {
+//             List<String> ans = partnerorderMap.get(partnerId);
+//             partnerorderMap.remove(partnerId);
+//             for (String id : ans) {
+//                 orderMap.remove(id);
+//             }
+//         }
+//         if (partnerMap.containsKey(partnerId)) partnerMap.remove(partnerId);
+//     }
+//
+//    }
 
     public void deleteOrderById(String orderId) {
 

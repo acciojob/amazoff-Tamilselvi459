@@ -2,6 +2,7 @@ package com.driver;
 
 import java.util.List;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/orders")
+@Log4j2
 public class OrderController {
-
+//    public OrderController(){
+//        log.info("running controller");
+//    }
     @Autowired
     OrderService orderservice;
 
@@ -29,6 +33,7 @@ public class OrderController {
     @PostMapping("/add-order") // 1
 
     public ResponseEntity<String> addOrder(@RequestBody Order order){
+    //  log.debug("adding order");
           orderservice.addOrder(order);
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
     }
