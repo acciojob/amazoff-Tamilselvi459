@@ -12,9 +12,9 @@ public class OrderService {
 @Autowired
     OrderRepository orderrepository ;
 
-    public OrderService(OrderRepository orderrepositry){
+    public OrderService(OrderRepository orderrepository){
 
-        this.orderrepository = orderrepositry;
+        this.orderrepository = orderrepository;
     }
 
     public void addOrder(Order order) {
